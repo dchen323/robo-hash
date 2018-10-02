@@ -25,25 +25,34 @@ class App extends Component {
 
   render() {
     let image = this.state.generated ? (
-      <img src={`https://robohash.org/${this.state.url}.png?set=set4`} />
+      <img
+        src={`https://robohash.org/${this.state.url}.png?set=set4`}
+        className="picture"
+      />
     ) : (
       <span />
     );
 
     return (
       <div className="App">
-        <header className="App-header">Welcome to RoboHash!</header>
-        <form className="container" onSubmit={this.submit.bind(this)}>
+        <header className="App-header">Welcome to Cat Sprites!</header>
+        <form onSubmit={this.submit.bind(this)} className="form-inline form">
+          <div className="form-group mx-sm-4 mb-2">
+            <input
+              type="text"
+              placeholder="Enter some text to generate a sprite"
+              name="input"
+              className="form-control form-control-lg input"
+              value={this.state.text}
+              onChange={this.update}
+            />
+          </div>
           <input
-            type="text"
-            placeholder="Enter some text to generate a sprite!"
-            name="input"
-            value={this.state.text}
-            onChange={this.update}
+            type="submit"
+            value="Generate Sprite"
+            className="btn btn-info btn-lg mb-2"
           />
-          <input type="submit" value="Generate Sprite!" />
         </form>
-
         {image}
       </div>
     );
