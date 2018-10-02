@@ -1,25 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      text: ""
+    };
+
+    this.update = this.update.bind(this);
+  }
+
+  update(e) {
+    this.setState({ text: e.target.value });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <header className="App-header">Welcome to RoboHash!</header>
+        <form className="container">
+          <input
+            type="text"
+            placeholder="Enter some text to generate a sprite!"
+            name="input"
+            value={this.state.text}
+            onChange={this.update}
+          />
+          <input type="submit" value="Generate Sprite!" />
+        </form>
       </div>
     );
   }
