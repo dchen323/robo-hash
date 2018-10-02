@@ -5,7 +5,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      text: ""
+      text: "",
+      generated: false,
+      url: ""
     };
 
     this.update = this.update.bind(this);
@@ -15,11 +17,23 @@ class App extends Component {
     this.setState({ text: e.target.value });
   }
 
+  submit(e) {
+    e.preventDefault();
+    const userText = this.state.text;
+    this.setState({ generated: true, url: userText });
+  }
+
   render() {
+    let image = this.state.generated ? (
+      <img src={`https://robohash.org/${this.state.url}.png?set=set4`} />
+    ) : (
+      <span />
+    );
+
     return (
       <div className="App">
         <header className="App-header">Welcome to RoboHash!</header>
-        <form className="container">
+        <form className="container" onSubmit={this.submit.bind(this)}>
           <input
             type="text"
             placeholder="Enter some text to generate a sprite!"
@@ -29,6 +43,8 @@ class App extends Component {
           />
           <input type="submit" value="Generate Sprite!" />
         </form>
+
+        {image}
       </div>
     );
   }
