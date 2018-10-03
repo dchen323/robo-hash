@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   resetState() {
-    this.setState({ generated: false });
+    this.setState({ generated: false, text: "" });
   }
 
   render() {
