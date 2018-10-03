@@ -22,7 +22,10 @@ class App extends Component {
   submit(e) {
     e.preventDefault();
     const userText = this.state.text;
+    //Reset state used to get animations for each sprite generated
     this.resetState();
+
+    //Make sure sprite is removed before adding new one
     setTimeout(() => this.setState({ generated: true, url: userText }), 0);
   }
 
@@ -32,6 +35,7 @@ class App extends Component {
 
   render() {
     let image;
+    //Set sprite to generated sprite or blank span
     image = this.state.generated ? (
       <Animated animationIn="bounceInLeft">
         <img
