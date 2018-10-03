@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Animated } from "react-animated-css";
 import "./App.css";
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
     };
 
     this.update = this.update.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
   update(e) {
@@ -20,15 +22,24 @@ class App extends Component {
   submit(e) {
     e.preventDefault();
     const userText = this.state.text;
-    this.setState({ generated: true, url: userText });
+    this.resetState();
+    setTimeout(() => this.setState({ generated: true, url: userText }), 0);
+  }
+
+  resetState() {
+    this.setState({ generated: false });
   }
 
   render() {
-    let image = this.state.generated ? (
-      <img
-        src={`https://robohash.org/${this.state.url}.png?set=set4`}
-        className="picture"
-      />
+    let image;
+    image = this.state.generated ? (
+      <Animated animationIn="bounceInLeft">
+        <img
+          src={`https://robohash.org/${this.state.url}.png?set=set4`}
+          className="picture animated bounce"
+          alt="cat"
+        />
+      </Animated>
     ) : (
       <span />
     );
