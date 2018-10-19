@@ -15,6 +15,12 @@ class App extends Component {
     this.resetState = this.resetState.bind(this);
   }
 
+  componentDidMount() {
+    if (sessionStorage.url !== undefined) {
+      this.setState({ generated: true, url: sessionStorage.url });
+    }
+  }
+
   update(e) {
     this.setState({ text: e.target.value });
   }
@@ -24,7 +30,7 @@ class App extends Component {
     const userText = this.state.text;
     //Reset state used to get animations for each sprite generated
     this.resetState();
-
+    sessionStorage.url = userText;
     //Make sure sprite is removed before adding new one
     setTimeout(() => this.setState({ generated: true, url: userText }), 0);
   }
